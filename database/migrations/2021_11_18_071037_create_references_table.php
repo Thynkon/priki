@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDomainsTable extends Migration
+class CreateReferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateDomainsTable extends Migration
      */
     public function up()
     {
-        Schema::create('domains', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('name', 45)->unique('name_UNIQUE');
-            $table->string('slug', 45)->unique('slug_UNIQUE');
+        Schema::create('references', function (Blueprint $table) {
+            $table->id();
+            $table->string('description', 100);
+            $table->string('url', 2000);
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateDomainsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domains');
+        Schema::dropIfExists('references');
     }
 }

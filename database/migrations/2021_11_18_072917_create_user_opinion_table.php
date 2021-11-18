@@ -14,11 +14,12 @@ class CreateUserOpinionTable extends Migration
     public function up()
     {
         Schema::create('user_opinion', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('user_id')->index('fk_users_has_opinions_user_idx');
-            $table->integer('opinion_id')->index('fk_users_has_opinions_opinions1_idx');
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('opinion_id')->constrained('opinions')->onDelete('cascade');
             $table->string('comment', 5000);
-            $table->integer('points')->default(0);
+            $table->integer('points');
+            $table->timestamps();
         });
     }
 

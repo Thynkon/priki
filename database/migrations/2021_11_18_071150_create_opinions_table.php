@@ -14,11 +14,11 @@ class CreateOpinionsTable extends Migration
     public function up()
     {
         Schema::create('opinions', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('description', 5000);
-            $table->integer('practice_id')->index('fk_opinion_about_idx');
-            $table->integer('user_id')->index('fk_opinions_users1_idx');
-            $table->integer('opinionstate_id');
+            $table->foreignId('practice_id')->constrained('practices')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
