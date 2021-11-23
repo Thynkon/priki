@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class CreateDomainsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 15);
-            $table->string('slug', 45)->unique();
-            $table->timestamps();
+        Schema::create('domains', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->string('name', 45)->unique('name_UNIQUE');
+            $table->string('slug', 45)->unique('slug_UNIQUE');
         });
     }
 
@@ -28,6 +27,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('domains');
     }
 }

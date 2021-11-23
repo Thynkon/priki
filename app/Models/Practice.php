@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PublicationState extends Model
+class Practice extends Model
 {
     use HasFactory;
 
-    protected $table = "publication_states";
+    protected $table = "practices";
     protected $primaryKey = "id";
-    public $timestamps = false;
 }

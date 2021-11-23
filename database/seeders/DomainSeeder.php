@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Domain;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class DomainSeeder extends Seeder
 {
@@ -15,17 +14,19 @@ class DomainSeeder extends Seeder
      */
     public function run()
     {
-        DB::table(Domain::getTableName())->insert([
-            "slug" => "PROG_LANG",
-            "name" => "Languages de programmation"
-        ]);
-        DB::table(Domain::getTableName())->insert([
-            "slug" => "BACKUPS",
-            "name" => "Sauvegardes"
-        ]);
-        DB::table(Domain::getTableName())->insert([
-            "slug" => "PACKAGE_MANAGEMENT",
-            "name" => "Maintient de paquets"
-        ]);
+        Domain::insert(
+            [
+                ['name' => 'Web', 'slug' => 'WEB'],
+                ['name' => 'Scientifique', 'slug' => 'SCI'],
+                ['name' => 'Business', 'slug' => 'BUS'],
+                ['name' => 'Medical', 'slug' => 'MED'],
+                ['name' => 'Industriel and contrôle de processus', 'slug' => 'IND'],
+                ['name' => 'Embarqué', 'slug' => 'EMB'],
+                ['name' => 'Big Data', 'slug' => 'BGD'],
+                ['name' => 'Militaire', 'slug' => 'MIL'],
+                ['name' => 'Système d\'exploitation', 'slug' => 'OS'],
+                ['name' => 'Outils', 'slug' => 'TLS'],
+            ]
+        );
     }
 }

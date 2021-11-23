@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PublicationState extends Model
+class Reference extends Model
 {
     use HasFactory;
 
-    protected $table = "publication_states";
+    protected $table = "references";
     protected $primaryKey = "id";
-    public $timestamps = false;
+    public $timestamps=false;
+    protected $fillable = [
+        'description'
+    ];
 }
