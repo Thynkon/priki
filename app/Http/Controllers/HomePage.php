@@ -17,7 +17,7 @@ class HomePage extends Controller
 
         $practices = Practice::where([
             ['publication_state_id', $state->id],
-            ['updated_at', '<=', $date->toDateTimeString()],
+           // ['updated_at', '<=', $date->toDateTimeString()],
         ])->get();
 
         return view('homepage')->with(['practices' => $practices]);
