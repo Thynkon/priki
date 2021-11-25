@@ -11,4 +11,9 @@ class Practice extends Model
 
     protected $table = "practices";
     protected $primaryKey = "id";
+
+    public function domain()
+    {
+        return $this->belongsTo(Domain::class);
+    }
 }

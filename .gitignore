@@ -510,3 +510,4 @@ Homestead.json
 /public/.htaccess
 /storage
 storage/*.key
+public/css/*

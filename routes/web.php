@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/accueil', [HomePage::class, 'index']);
+Route::get('/accueil', [HomePage::class, 'index'])->name('homepage');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

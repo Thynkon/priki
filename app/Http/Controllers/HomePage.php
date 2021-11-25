@@ -14,11 +14,10 @@ class HomePage extends Controller
         $date->timezone(new \DateTimeZone('UTC'));
         $date->subDays(5);
         $state = PublicationState::where('slug', 'PUB')->get()[0];
-
         $practices = Practice::where([
             ['publication_state_id', $state->id],
-           // ['updated_at', '<=', $date->toDateTimeString()],
-        ])->get();
+            ['updated_at', '<=', $date->toDateTimeString()],
+        ])->paginate(3);
 
         return view('homepage')->with(['practices' => $practices]);
     }
