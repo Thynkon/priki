@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomePage;
-use App\Http\Livewire\ShowPractices;
+use App\Http\Controllers\PracticeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/accueil', [HomePage::class, 'index'])->name('homepage');
+Route::resource('practice', PracticeController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
