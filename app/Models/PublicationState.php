@@ -12,4 +12,9 @@ class PublicationState extends Model
     protected $table = "publication_states";
     protected $primaryKey = "id";
     public $timestamps = false;
+
+    public function practices()
+    {
+        return $this->hasMany(Practice::class);
+    }
 }

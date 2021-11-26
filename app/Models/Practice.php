@@ -16,4 +16,9 @@ class Practice extends Model
     {
         return $this->belongsTo(Domain::class);
     }
+
+    public function publication_state()
+    {
+        return $this->belongsTo(PublicationState::class);
+    }
 }

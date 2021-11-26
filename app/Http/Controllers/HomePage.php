@@ -10,15 +10,6 @@ class HomePage extends Controller
 {
     public function index()
     {
-        $date = Carbon::now();
-        $date->timezone(new \DateTimeZone('UTC'));
-        $date->subDays(5);
-        $state = PublicationState::where('slug', 'PUB')->get()[0];
-        $practices = Practice::where([
-            ['publication_state_id', $state->id],
-            ['updated_at', '<=', $date->toDateTimeString()],
-        ])->paginate(3);
-
-        return view('homepage')->with(['practices' => $practices]);
+        return view('homepage');
     }
 }

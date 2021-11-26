@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomePage;
+use App\Http\Livewire\ShowPractices;
 use Illuminate\Support\Facades\Route;
 
 /*
