@@ -27,6 +27,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
+        'fullname',
         'name',
         'email',
         'password',
@@ -65,5 +66,10 @@ class User extends Authenticatable
     public function opinions()
     {
         return $this->hasMany(Opinion::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

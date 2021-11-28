@@ -11,7 +11,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
         "laravel/jetstream": "^2.4",
-        "laravel/sanctum": "^2.11",
+        "laravel/sanctum": "^2.12",
+        "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5"
     },

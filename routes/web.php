@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomePage;
 use App\Http\Controllers\PracticeController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,10 @@ Route::get('/', function () {
 
 Route::get('/accueil', [HomePage::class, 'index'])->name('homepage');
 Route::resource('practice', PracticeController::class);
+
+Route::get('/login/github', [LoginController::class, 'redirectToProvider']);
+
+Route::get('/login/github/callback', [LoginController::class, 'handleProviderCallback']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('dashboard');
