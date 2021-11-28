@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateOpinionRequest;
+use App\Models\Opinion;
 use App\Models\Practice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PracticeController extends Controller
 {
@@ -24,24 +27,33 @@ class PracticeController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOpinionRequest $request)
     {
-        //
+        $data = $request->validated();
+        $user = Auth::user();
+        $practice = Practice::find($data["practice_id"]);
+
+        $opinion = Opinion::make(["description" => $data["opinion"]]);
+        $opinion->user()->associate($user);
+        $opinion->practice()->associate($practice);
+
+        $opinion->create();
+
+        return view('homepage');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +65,7 @@ class PracticeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +76,8 @@ class PracticeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,7 +88,7 @@ class PracticeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

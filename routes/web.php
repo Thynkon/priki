@@ -22,6 +22,6 @@ Route::get('/', function () {
 Route::get('/accueil', [HomePage::class, 'index'])->name('homepage');
 Route::resource('practice', PracticeController::class);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('dashboard');
 })->name('dashboard');

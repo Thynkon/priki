@@ -11,4 +11,16 @@ class Opinion extends Model
 
     protected $table = "opinions";
     protected $primaryKey = "id";
+
+    protected $fillable = ['description', 'user_id', 'practice_id'];
+
+    public function practice()
+    {
+        return $this->belongsTo(Practice::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

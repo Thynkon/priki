@@ -21,4 +21,9 @@ class Practice extends Model
     {
         return $this->belongsTo(PublicationState::class);
     }
+
+    public function opinions()
+    {
+        return $this->hasMany(Opinion::class);
+    }
 }
