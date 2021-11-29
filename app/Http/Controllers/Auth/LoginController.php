@@ -37,6 +37,6 @@ class LoginController extends Controller
         $role->users()->save($user);
 
         Auth::login($user, true);
-        return redirect()->route('homepage');
+        return redirect()->route('dashboard');
     }
 }
