@@ -8,6 +8,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Two\InvalidStateException;
 
 class LoginController extends Controller
 {
@@ -19,7 +20,11 @@ class LoginController extends Controller
 
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('github')->user();
+        try {
+            $user = Socialite::driver('github')->user();
+        } catch (InvalidStateException $e) {
+            $user = Socialite::driver('github')->stateless()->user();
+        }
         $role = Role::where('slug', 'MBR')->first();
 
         $user = User::firstOrNew([
