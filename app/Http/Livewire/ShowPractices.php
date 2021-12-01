@@ -17,9 +17,8 @@ class ShowPractices extends Component
     public int $limit = self::DEFAULT_LIMIT;
     protected $listeners = ['update' => 'update'];
 
-    public function update($limit)
+    public function update()
     {
-        $this->limit = $limit;
         $this->resetPage();
     }
 

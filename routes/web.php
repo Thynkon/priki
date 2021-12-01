@@ -5,6 +5,8 @@ use App\Http\Controllers\HomePage;
 use App\Http\Controllers\PracticeController;
 use App\Models\Practice;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DomainController;
+use App\Http\Livewire\ShowDomainsPractices;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,7 @@ Route::get('/', function () {
 
 Route::get('/accueil', [HomePage::class, 'index'])->name('homepage');
 Route::get('practice/{id}', [PracticeController::class, 'show'])->name('practice.show');
+Route::get('/domains', [DomainController::class, 'index'])->name('domains');
 
 // github authentication
 Route::get('/login/github', [LoginController::class, 'redirectToProvider']);
