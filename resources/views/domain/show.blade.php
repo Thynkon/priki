@@ -13,7 +13,7 @@
                         {{ __('Show practices of domain') }}
                     </div>
                     <div class="flex flex-col md:flex-row flex-wrap p-10">
-                        @livewire('show-domains-practices', ['domains' => $domains])
+                        @livewire('show-domains-practices', ['domains' => $domains, 'numberOfPractices' => $numberOfPractices])
                     </div>
                 </div>
             </div>
