@@ -18,6 +18,5 @@
                 @endforelse
             </div>
         </div>
-        {{ $practices->links() }}
     </div>
 </div>

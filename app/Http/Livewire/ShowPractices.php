@@ -24,13 +24,7 @@ class ShowPractices extends Component
 
     public function render()
     {
-        $date = Carbon::now('UTC')->startOfDay();
-        $date->subDays($this->limit);
-        $state = PublicationState::where('slug', 'PUB')->get()[0];
-        $practices = Practice::where([
-            ['publication_state_id', $state->id],
-            ['updated_at', '>=', $date->toDateTimeString()]
-        ])->paginate(9);
+        $practices = Practice::publishedModified($this->limit);
 
         return view('livewire.show-practices')->with(['practices' => $practices]);
     }
