@@ -34,9 +34,21 @@ class Practice extends Model
         $date->subDays($nbrDays);
 
         return self::where('updated_at', '>=', $date)
-            ->whereHas('publicationState', function($q) {
+            ->whereHas('publicationState', function ($q) {
                 $q->where('slug', 'PUB');
             })->get();
+    }
 
+    public function scopePublished($query)
+    {
+        return $this->wherePublicationState($query, 'PUB');
+    }
+
+    private function wherePublicationState($query, string $state)
+    {
+        return $query->whereHas(
+            'publicationState',
+            fn ($q) => $q->where('slug', $state)
+        );
     }
 }

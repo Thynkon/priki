@@ -19,18 +19,17 @@ use App\Http\Livewire\ShowDomainsPractices;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/accueil', [HomePage::class, 'index'])->name('homepage');
+Route::get('/', [HomePage::class, 'index'])->name('homepage');
 Route::get('practice/{id}', [PracticeController::class, 'show'])->name('practice.show');
 Route::get('/domains', [DomainController::class, 'index'])->name('domains');
+Route::get('/domain-{domain}', [DomainController::class, 'byDomain'])->name('domain.domain');
 
 // github authentication
-Route::get('/login/github', [LoginController::class, 'redirectToProvider']);
+Route::get('/login/github', [LoginController::class, 'redirectToProvider'])->name('login.github');
 Route::get('/login/github/callback', [LoginController::class, 'handleProviderCallback']);
 
+/*
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('dashboard');
 })->name('dashboard');
+*/
