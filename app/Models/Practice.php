@@ -39,6 +39,14 @@ class Practice extends Model
             })->get();
     }
 
+    public function scopeOfDomain($query, string $domain)
+    {
+        return $query->whereHas(
+            'domain',
+            fn ($q) => $q->where('slug', $domain)
+        );
+    }
+
     public function scopePublished($query)
     {
         return $this->wherePublicationState($query, 'PUB');

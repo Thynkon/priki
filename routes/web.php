@@ -22,7 +22,7 @@ use App\Http\Livewire\ShowDomainsPractices;
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
 Route::get('practice/{id}', [PracticeController::class, 'show'])->name('practice.show');
 Route::get('/domains', [DomainController::class, 'index'])->name('domains');
-Route::get('/domain-{domain}', [DomainController::class, 'byDomain'])->name('domain.domain');
+Route::get('/domain/{domain}', [DomainController::class, 'byDomain'])->name('domain.domain');
 
 // github authentication
 Route::get('/login/github', [LoginController::class, 'redirectToProvider'])->name('login.github');

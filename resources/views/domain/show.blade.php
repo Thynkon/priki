@@ -13,7 +13,19 @@
                         {{ __('Show practices of domain') }}
                     </div>
                     <div class="flex flex-col md:flex-row flex-wrap p-10">
-                        @livewire('show-domains-practices', ['domains' => $domains, 'numberOfPractices' => $numberOfPractices])
+                        <div class="relative inline-block w-full text-gray-700">
+                            <div>
+                                <div class="flex flex-col md:flex-row flex-wrap">
+                                    @forelse($practices as $practice)
+                                        <x-practice-card :practice="$practice"/>
+                                    @empty
+                                    <div>
+                                        <p>Aucune practice à afficher ici</p>
+                                    </div>
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

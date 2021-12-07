@@ -1,5 +1,5 @@
 @push('scripts')
-    <script src="{{ mix('js/navbar.js') }}" defer></script>
+<script src="{{ mix('js/navbar.js') }}" defer></script>
 @endpush
 
 <div class="fixed top-0 inset-x-0 z-50 shadow-md">
@@ -35,31 +35,29 @@
                 <div class="hidden w-full h-full lg:flex space-x-4">
                     <x-nav.link name="Accueil" route="{{ route('homepage') }}" />
                     <x-nav.dropdown name="Domaines" route="{{ route('domains') }}" route-group="domain"
-                        title="Liste des pratiques par domaine">
-                        <x-nav.dropdown-link name="Toutes {{ $domains->sum('practices_count') }}"
-                            route="{{ route('domains') }}" />
+                        title="Liste des practiques par domaine">
+                        <x-nav.dropdown-link name="Toutes {{ $domains->sum('practices_count') }}" route="{{ route('domains') }}" />
                         @foreach ($domains as $domain)
-                            <x-nav.dropdown-link name="{!! $domain->name !!} {{ $domain->practices_count }}"
-                                route="{{ route('domain.domain', ['domain' => $domain->slug]) }}" />
+                        <x-nav.dropdown-link name="{!! $domain->name !!} {{ $domain->practices_count }}"
+                            route="{{ route('domain.domain', ['domain' => $domain->slug]) }}" />
                         @endforeach
                     </x-nav.dropdown>
 
                     <!-- Login !-->
                     <div class="flex w-full justify-end">
                         @auth
-                            <form method="POST" action="{{ route('logout') }}" class="flex items-center">
-                                @csrf
-                                <button type="submit"
-                                    class="px-3 py-2 border-2 border-purple-500 hover:border-purple-400 rounded font-semibold text-purple-500 hover:text-purple-400">
-                                    Se déconnecter
-                                </button>
-                            </form>
+                        <form method="POST" action="{{ route('logout') }}" class="flex items-center">
+                            @csrf
+                            <button type="submit"
+                                class="px-3 py-2 border-2 border-purple-500 hover:border-purple-400 rounded font-semibold text-purple-500 hover:text-purple-400">
+                                Se déconnecter
+                            </button>
+                        </form>
                         @else
-                        {{--                            <a href="{{ route('login') }}"--}}
-                            <a href="/login"
-                                class="flex items-center px-3 py-1 my-4 border-2 border-purple-500 hover:border-purple-400 rounded font-semibold text-purple-500 hover:text-purple-400">
-                                Se connecter
-                            </a>
+                        {{-- <a href="{{ route('login') }}" --}} <a href="/login"
+                            class="flex items-center px-3 py-1 my-4 border-2 border-purple-500 hover:border-purple-400 rounded font-semibold text-purple-500 hover:text-purple-400">
+                            Se connecter
+                        </a>
                         @endauth
                     </div>
                 </div>
@@ -74,8 +72,8 @@
                     <x-nav.mobile-dropdown-link name="Toutes {{ $domains->sum('practices_count') }}"
                         route="{{ route('domains') }}" />
                     @foreach ($domains as $domain)
-                        <x-nav.mobile-dropdown-link name="{!! $domain->name !!} {{ $domain->practices_count }}"
-                            route="{{ route('domain.domain', ['domain' => $domain->slug]) }}" />
+                    <x-nav.mobile-dropdown-link name="{!! $domain->name !!} {{ $domain->practices_count }}"
+                        route="{{ route('domain.domain', ['domain' => $domain->slug]) }}" />
                     @endforeach
                 </x-nav.mobile-dropdown>
             </div>

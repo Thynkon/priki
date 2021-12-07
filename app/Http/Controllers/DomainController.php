@@ -10,8 +10,12 @@ class DomainController extends Controller
 {
     public function index()
     {
-        $domains = Domain::orderBy('name')->get();
-        $numberOfPractices = Practice::count();
-        return view('domain.show')->with(['domains' => $domains, 'numberOfPractices' => $numberOfPractices]);
+        $practices = Practice::published();
+        return view('domain.show')->with('practices', $practices);
+    }
+    public function byDomain($domain)
+    {
+        $practices = Practice::ofDomain($domain)->get();
+        return view('domain.show')->with(['practices' => $practices]);
     }
 }
