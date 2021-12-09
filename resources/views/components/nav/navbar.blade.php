@@ -57,9 +57,13 @@
                             </button>
                         </form>
                         @else
-                        {{-- <a href="{{ route('login') }}" --}} <a href="/login"
+                        <a href="{{ route('login') }}"
                             class="flex items-center px-3 py-1 my-4 border-2 border-purple-500 hover:border-purple-400 rounded font-semibold text-purple-500 hover:text-purple-400">
                             Se connecter
+                        </a>
+                        <a href="{{ route('register') }}"
+                            class="flex items-center px-3 py-1 my-4 border-2 border-purple-500 hover:border-purple-400 rounded font-semibold text-purple-500 hover:text-purple-400">
+                            {{ __('Créer un compte') }}
                         </a>
                         @endauth
                     </div>

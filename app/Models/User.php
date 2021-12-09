@@ -29,6 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -69,5 +70,17 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    // Set a default role for new users
+    // Reference: https://stackoverflow.com/a/43127168
+    public static function create(array $attributes)
+    {
+        // Only set a default role if it is not provided
+        if (!array_key_exists('role_id', $attributes)) {
+            $attributes["role_id"] = Role::where('slug','MBR')->firstOrFail()->id;
+        }
+
+        return (new static)->newQuery()->create($attributes);
     }
 }

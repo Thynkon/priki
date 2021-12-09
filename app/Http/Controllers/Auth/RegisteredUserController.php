@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
 
 class RegisteredUserController extends Controller
 {
@@ -35,15 +37,24 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'fullname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        } catch (QueryException $e) {
+            if ($e->getCode() === "23000") {
+                throw ValidationException::withMessages(['name' => 'Ce pseudo est déjà utilisé !']);
+            }
+        }
 
         event(new Registered($user));
 
