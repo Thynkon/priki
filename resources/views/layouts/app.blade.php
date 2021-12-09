@@ -24,7 +24,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class="z-10">
+            <main class="z-10 mt-4">
                 {{ $slot }}
             </main>
         </div>

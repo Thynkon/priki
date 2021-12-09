@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function practices()
+    {
+        return $this->hasMany(Practice::class);
+    }
+
     // Set a default role for new users
     // Reference: https://stackoverflow.com/a/43127168
     public static function create(array $attributes)

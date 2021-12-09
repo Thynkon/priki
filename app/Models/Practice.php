@@ -28,6 +28,11 @@ class Practice extends Model
         return $this->hasMany(Opinion::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public static function publishedModified(int $nbrDays)
     {
         $date = Carbon::now('UTC')->startOfDay();
@@ -58,5 +63,10 @@ class Practice extends Model
             'publicationState',
             fn ($q) => $q->where('slug', $state)
         );
+    }
+
+    public static function isPublished(int $id)
+    {
+        return static::published()->where('id', $id)->exists();
     }
 }

@@ -10,7 +10,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="pl-10 pt-10">
-                        {{ __('Show practices of domain') }}
+                        {{ __('Afficher la liste des practices par domaine') }}
                     </div>
                     <div class="flex flex-col md:flex-row flex-wrap p-10">
                         <div class="relative inline-block w-full text-gray-700">

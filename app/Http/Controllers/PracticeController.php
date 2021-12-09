@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Practice;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class PracticeController extends Controller
 {
@@ -15,7 +16,12 @@ class PracticeController extends Controller
      */
     public function show($id)
     {
-        $practice = Practice::find($id);
-        return view('practices.update')->with(['practice' => $practice]);
+        if (!Practice::isPublished($id)) {
+            Session::flash('message', "La practice à laquelle vous essayez d'afficher n'est pas publiée ou n'existe pas !"); 
+            return redirect()->route('homepage');
+        } else {
+            $practice = Practice::find($id);
+            return view('practices.update')->with(['practice' => $practice]);
+        }
     }
 }
