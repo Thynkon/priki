@@ -10,7 +10,7 @@ class DomainController extends Controller
 {
     public function index()
     {
-        $practices = Practice::published();
+        $practices = Practice::published()->get();
         return view('domain.show')->with('practices', $practices);
     }
     public function byDomain($domain)

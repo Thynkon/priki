@@ -15,9 +15,10 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/navbar.js', 'public/js')
     .js('resources/js/navMobileDropdown.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
-            require('postcss-import'),
-            require('tailwindcss'),
-        ]);
+        require('postcss-import'),
+        require('tailwindcss'),
+        require('autoprefixer'),
+    ]);
 
 if (mix.inProduction()) {
     mix.version();

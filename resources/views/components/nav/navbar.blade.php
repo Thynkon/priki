@@ -46,6 +46,9 @@
                     <!-- Login !-->
                     <div class="flex w-full justify-end">
                         @auth
+                        <div class="flex items-center mr-4">
+                            <div>{{ Auth::user()->fullname }} - {{ Auth::user()->name }}</div>
+                        </div>
                         <form method="POST" action="{{ route('logout') }}" class="flex items-center">
                             @csrf
                             <button type="submit"
