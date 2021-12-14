@@ -19,6 +19,16 @@
                             <div class="text-gray-500 mt-4">Crée le: {{ $practice->created_at->translatedFormat('jS F Y')}}</div>
                             <div class="text-gray-500 mt-4">Mis à jour le: {{ $practice->updated_at->translatedFormat('jS F Y')}}</div>
                         </div>
+                        
+                        @forelse ($practice->opinions as $opinion)
+                            <div class="flex flex-col items-end bg-gray-50 shadow p-4 my-4 rounded w-full">
+                                <div>{{$opinion->description}}</div>
+                                <div class="bg-green-200 p-1 rounded">{{$opinion->user->fullname}}</div>
+                            </div>
+                        @empty
+                            <div>Aucune opinion à afficher</div>
+                        @endforelse
+                        
                     </div>
                     <div class="flex flex-col md:flex-row flex-wrap px-10">
                         <div class="w-full">
