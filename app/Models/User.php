@@ -67,6 +67,11 @@ class User extends Authenticatable
         return $this->hasMany(Opinion::class);
     }
 
+    public function feedbacks()
+    {
+        return $this->belongsToMany(Opinion::class, 'user_opinion')->withPivot('comment', 'points');
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
@@ -83,7 +88,7 @@ class User extends Authenticatable
     {
         // Only set a default role if it is not provided
         if (!array_key_exists('role_id', $attributes)) {
-            $attributes["role_id"] = Role::where('slug','MBR')->firstOrFail()->id;
+            $attributes["role_id"] = Role::where('slug', 'MBR')->firstOrFail()->id;
         }
 
         return (new static)->newQuery()->create($attributes);

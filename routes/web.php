@@ -7,6 +7,7 @@ use App\Models\Practice;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DomainController;
 use App\Http\Livewire\ShowDomainsPractices;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::get('/login/github/callback', [LoginController::class, 'handleProviderCal
 
 
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
+Route::resource('user', UserController::class);
 
 /*
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {

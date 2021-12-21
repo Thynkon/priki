@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             PracticeSeeder::class,
             OpinionSeeder::class,
             ReferenceSeeder::class,
-            OpinionReferenceSeeder::class
+            OpinionReferenceSeeder::class,
+            UserOpinionSeeder::class,
         ]);
     }
 }

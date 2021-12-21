@@ -23,4 +23,19 @@ class Opinion extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function userFeedbacks()
+    {
+        return $this->belongsToMany(User::class, 'user_opinion')->withPivot('comment', 'points');
+    }
+
+    public function upvotes()
+    {
+        return $this->userFeedbacks()->wherePivot('points', '>', 0);
+    }
+
+    public function downvotes()
+    {
+        return $this->userFeedbacks()->wherePivot('points', '<', 0);
+    }
 }

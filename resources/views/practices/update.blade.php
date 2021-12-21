@@ -21,14 +21,11 @@
                         </div>
                         
                         @forelse ($practice->opinions as $opinion)
-                            <div class="flex flex-col items-end bg-gray-50 shadow p-4 my-4 rounded w-full">
-                                <div>{{$opinion->description}}</div>
-                                <div class="bg-green-200 p-1 rounded">{{$opinion->user->fullname}}</div>
-                            </div>
+                            <x-practice-opinion :opinion="$opinion"/>
                         @empty
                             <div>Aucune opinion à afficher</div>
                         @endforelse
-                        
+
                     </div>
                     <div class="flex flex-col md:flex-row flex-wrap px-10">
                         <div class="w-full">
