@@ -36,4 +36,6 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="/js/dropdown.js"></script>
 </x-app-layout>

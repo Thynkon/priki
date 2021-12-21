@@ -4,19 +4,20 @@ namespace App\View\Components;
 
 use App\Models\Opinion;
 use Illuminate\View\Component;
+use App\Models\User;
 
 class OpinionFeedback extends Component
 {
-    public Opinion $opinion;
+    public User $user;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Opinion $opinion)
+    public function __construct(User $user)
     {
-        $this->opinion = $opinion;
+        $this->user = $user;
     }
 
     /**
