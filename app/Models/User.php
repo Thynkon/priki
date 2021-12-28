@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use Doctrine\DBAL\Query\QueryBuilder;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -69,7 +69,7 @@ class User extends Authenticatable
 
     public function feedbacks()
     {
-        return $this->belongsToMany(Opinion::class, 'user_opinion')->withPivot('comment', 'points');
+        return $this->belongsToMany(Opinion::class, 'user_opinion')->as('feedback')->withPivot('comment', 'points');
     }
 
     public function role()
@@ -92,5 +92,18 @@ class User extends Authenticatable
         }
 
         return (new static)->newQuery()->create($attributes);
+    }
+
+    public function commentsOfPractice($practice)
+    {
+        return $this->opinions()->whereHas('practice', function (Builder $query)  use ($practice) {
+            $query->where($practice->getKeyName(), $practice->id);
+        });
+    }
+
+    public function wroteOpinion(Opinion $opinion)
+    {
+        // getKeyName returns the primary key field
+        return $this->opinions()->where($opinion->getKeyName(), $opinion->id)->exists();
     }
 }

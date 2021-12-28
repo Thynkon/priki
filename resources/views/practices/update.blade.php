@@ -27,10 +27,21 @@
                         @endforelse
 
                     </div>
-                    <div class="flex flex-col md:flex-row flex-wrap px-10">
-                        <div class="w-full">
-                            @livewire('opinion-form', ["practice_id" => $practice->id])
+
+                    <div class="flex flex-col md:flex-row flex-wrap">
+                    @if (Auth::check())
+                        @if (Auth::user()->commentsOfPractice($practice)->count() === 0)
+                            <div class="flex flex-col md:flex-row flex-wrap px-10 w-full">
+                                <div class="w-full">
+                                    <x-opinion-form :practice="$practice"/>
+                                </div>
+                            </div>
+                        @endif
+                    @else
+                        <div class="flex pb-4 w-full px-10">
+                            <div class="p-4 bg-red-100 w-full text-center rounded">Vous devez vous connecter afin de pouvoir commenter des opinions !</div>
                         </div>
+                    @endif
                     </div>
                 </div>
             </div>

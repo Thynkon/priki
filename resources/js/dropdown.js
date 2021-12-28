@@ -1,12 +1,14 @@
-let comments = document.getElementById('comments-wrapper');
-let feedback = document.getElementById('feedback-wrapper');
-
-comments.addEventListener('click', function(event) {
-    if (feedback.classList.contains('block')) {
-        feedback.classList.remove('block');
-        feedback.classList.add('hidden');
+function toggleDisplay(element) {
+    if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden');
     } else {
-        feedback.classList.remove('hidden');
-        feedback.classList.add('block');
+        element.classList.add('hidden');
+    }
+}
+
+document.querySelectorAll('.dropdown-button').forEach(function(element) {
+    element.onclick = function(e) {
+       let next = element.nextElementSibling;
+        toggleDisplay(next);
     }
 });

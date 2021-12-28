@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DomainController;
 use App\Http\Livewire\ShowDomainsPractices;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OpinionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-//Route::get('/', [HomePage::class, 'index'])->name('homepage');
-Route::get('practice/{id}', [PracticeController::class, 'show'])->name('practice.show');
 Route::get('/domains', [DomainController::class, 'index'])->name('domains');
 Route::get('/domain/{domain}', [DomainController::class, 'byDomain'])->name('domain.domain');
 
@@ -29,14 +28,11 @@ Route::get('/domain/{domain}', [DomainController::class, 'byDomain'])->name('dom
 Route::get('/login/github', [LoginController::class, 'redirectToProvider'])->name('login.github');
 Route::get('/login/github/callback', [LoginController::class, 'handleProviderCallback']);
 
-
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
 Route::resource('user', UserController::class);
+Route::post('/opinion/{practice_id}/create', [OpinionController::class, 'store'])->name('opinion.store');
+Route::get('/opinion/{id}/delete', [OpinionController::class, 'delete'])->name('opinion.delete');
 
-/*
-Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
-*/
+Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practice.show');
 
 require __DIR__.'/auth.php';

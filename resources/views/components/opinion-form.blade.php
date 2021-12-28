@@ -1,4 +1,4 @@
-<form wire:submit.prevent="submit">
+<form method="post" action="{{ route('opinion.store', ['practice_id' => $practice->id]) }} ">
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -24,7 +24,6 @@
             id="opinion" name="opinion" type="text" wire:model="opinion" required></textarea>
     </div>
 
-    <input type="hidden" name="practice_id" value="{{ $practice->id }}" wire:model="practice_id" required>
     <input name="_token" type="hidden" value="{{ csrf_token() }}" />
 
     <div class="flex items-center justify-end py-3 text-right sm:rounded-bl-md sm:rounded-br-md">
