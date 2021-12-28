@@ -20,7 +20,7 @@ class PracticeController extends Controller
             Session::flash('message', "La practice à laquelle vous essayez d'afficher n'est pas publiée ou n'existe pas !");
             return redirect()->route('homepage');
         } else {
-            $practice = Practice::find($id);
+            $practice = Practice::with('opinions', 'user')->find($id);
             return view('practices.update')->with(['practice' => $practice]);
         }
     }
