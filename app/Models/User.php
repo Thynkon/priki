@@ -101,7 +101,7 @@ class User extends Authenticatable
         });
     }
 
-    public function wroteOpinion(Opinion $opinion)
+    public function wrote(Opinion $opinion)
     {
         // getKeyName returns the primary key field
         return $this->opinions()->where($opinion->getKeyName(), $opinion->id)->exists();

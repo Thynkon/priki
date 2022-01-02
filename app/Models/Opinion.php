@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helpers\Vote;
 
 class Opinion extends Model
 {
@@ -24,18 +27,50 @@ class Opinion extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function feedbacks()
+    // a feedback is an user opinion whose comment is not empty
+    // a vote is an user opinion whose comment is empty and points are not zero
+     private function fb()
     {
         return $this->belongsToMany(User::class, 'user_opinion')->as('feedback')->withPivot('comment', 'points');
     }
 
+    public function feedbacks()
+    {
+        return $this->fb()->wherePivot('comment', '!=', '');
+    }
+
+    private function votes()
+    {
+        return $this->fb()->wherePivot('comment', '=', '');
+    }
+
     public function upvotes()
     {
-        return $this->feedbacks()->wherePivot('points', '>', 0);
+        return $this->votes()->wherePivot('points', '>', 0);
     }
 
     public function downvotes()
     {
-        return $this->feedbacks()->wherePivot('points', '<', 0);
+        return $this->votes()->wherePivot('points', '<', 0);
+    }
+
+    public function upvote()
+    {
+        return $this->vote(Vote::UPVOTE);
+    }
+
+    public function downvote()
+    {
+        return $this->vote(Vote::DOWNVOTE);
+    }
+
+    private function vote(int $vote)
+    {
+        $exists = $this->votes()->wherePivot('user_id', Auth::id())->exists();
+        if (!$exists) {
+            $this->votes()->attach(Auth::id(), ['comment' => '', 'points' => $vote]);
+        } else {
+            $this->votes()->updateExistingPivot(Auth::id(), ['points' => $vote]);
+        }
     }
 }

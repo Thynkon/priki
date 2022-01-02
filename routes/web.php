@@ -35,4 +35,7 @@ Route::get('/opinion/{id}/delete', [OpinionController::class, 'delete'])->name('
 
 Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practice.show');
 
+Route::get('/opinion/{id}/upvote', [OpinionController::class, 'upvote'])->name('opinion.upvote');
+Route::get('/opinion/{id}/downvote', [OpinionController::class, 'downvote'])->name('opinion.downvote');
+
 require __DIR__.'/auth.php';
