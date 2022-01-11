@@ -49,7 +49,18 @@
             </div>
         </div>
         <div class="w-full ml-20">
-            <div class="text-justify">{{$opinion->description}}</div>
+            <div class="text-justify px-2">{{$opinion->description}}</div>
+            <div class="my-4 bg-cyan-50">
+                @foreach ($opinion->references as $reference)
+                    <div class="p-2">
+                        @if(isset($reference->url))
+                            <a href="{{ $reference->url }}" target="_blank" rel="noopener noreferrer">{{ $reference->description }}</a>
+                        @else
+                            <div>{{$reference->description}}</div>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
             <div class="text-right">
                 <div class="bg-green-200 p-1 rounded text-right inline-block">
                     <a href="{{ route('user.show', ['user' => $opinion->user->id]) }}">{{$opinion->user->fullname}}</a>
@@ -70,7 +81,7 @@
 
     <div class="feedback-wrapper hidden">
         @foreach ($opinion->feedbacks as $feedback)
-        <x-opinion-feedback :user="$feedback" />
+            <x-opinion-feedback :user="$feedback" />
         @endforeach
 
         <form method="POST" action="{{ route('opinion.comment', ['id' => $opinion->id]) }}">

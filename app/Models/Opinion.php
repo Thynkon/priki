@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Helpers\Vote;
+use App\Models\Reference;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Helpers\Vote;
 
 class Opinion extends Model
 {
@@ -72,5 +73,10 @@ class Opinion extends Model
         } else {
             $this->votes()->updateExistingPivot(Auth::id(), ['points' => $vote]);
         }
+    }
+
+    public function references()
+    {
+        return $this->belongsToMany(Reference::class);
     }
 }

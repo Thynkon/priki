@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Opinion;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reference extends Model
 {
@@ -15,4 +16,9 @@ class Reference extends Model
     protected $fillable = [
         'description'
     ];
+
+    public function opinions()
+    {
+        return $this->belongsToMany(Opinion::class);
+    }
 }
