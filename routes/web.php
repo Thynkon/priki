@@ -9,6 +9,7 @@ use App\Http\Controllers\DomainController;
 use App\Http\Livewire\ShowDomainsPractices;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OpinionController;
+use App\Http\Controllers\ReferenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,7 @@ Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practic
 Route::get('/opinion/{id}/upvote', [OpinionController::class, 'upvote'])->name('opinion.upvote');
 Route::get('/opinion/{id}/downvote', [OpinionController::class, 'downvote'])->name('opinion.downvote');
 Route::post('/opinion/{id}/comment', [OpinionController::class, 'comment'])->name('opinion.comment');
+
+Route::resource('references', ReferenceController::class);
 
 require __DIR__.'/auth.php';

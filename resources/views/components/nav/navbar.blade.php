@@ -28,6 +28,11 @@
                         {{ config('app.name') }}
                     </a>
                 </div>
+                <div class="absolute w-full text-center lg:hidden animate-fade-in-down ">
+                    <a href="{{ route('references.index') }}" class="uppercase font-bold text-2xl">
+                        Références
+                    </a>
+                </div>
             </div>
 
             <!-- Standard menu -->
@@ -42,6 +47,7 @@
                             route="{{ route('domain.domain', ['domain' => $domain->slug]) }}" />
                         @endforeach
                     </x-nav.dropdown>
+                    <x-nav.link name="Références" route="{{ route('references.index') }}" />
 
                     <!-- Login !-->
                     <div class="flex w-full justify-end">
