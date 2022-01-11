@@ -37,5 +37,6 @@ Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practic
 
 Route::get('/opinion/{id}/upvote', [OpinionController::class, 'upvote'])->name('opinion.upvote');
 Route::get('/opinion/{id}/downvote', [OpinionController::class, 'downvote'])->name('opinion.downvote');
+Route::post('/opinion/{id}/comment', [OpinionController::class, 'comment'])->name('opinion.comment');
 
 require __DIR__.'/auth.php';

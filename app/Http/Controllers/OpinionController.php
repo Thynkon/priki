@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OpinionCreateRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Helpers\Vote;
 use App\Models\Opinion;
 use App\Models\Practice;
-use App\Helpers\Vote;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\OpinionCreateRequest;
+use App\Http\Requests\FeedbackCommentRequest;
 
 class OpinionController extends Controller
 {
@@ -75,6 +76,21 @@ class OpinionController extends Controller
     public function downvote(int $opinion_id)
     {
         return $this->vote($opinion_id, Vote::DOWNVOTE);
+    }
+
+    public function comment(FeedbackCommentRequest $request, int $opinion_id)
+    {
+        $validated_data = $request->validated();
+        // make sure that opinion exists
+        $opinion = Opinion::findOrFail($opinion_id);
+        $user = Auth::user();
+
+        $user->feedbacks()->attach($opinion->id, [
+            'points' => 0, 'comment' => $validated_data['comment']
+        ]);
+
+        session()->flash('message', __('Vous avez commenté avec succès !'));
+        return redirect()->back()->withInput();
     }
 
 }

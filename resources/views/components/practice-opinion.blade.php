@@ -72,5 +72,13 @@
         @foreach ($opinion->feedbacks as $feedback)
         <x-opinion-feedback :user="$feedback" />
         @endforeach
+
+        <form method="POST" action="{{ route('opinion.comment', ['id' => $opinion->id]) }}">
+            @csrf
+            <textarea name="comment" class="h-24 lg:h-44 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full mb-4"></textarea>
+            <div class="flex justify-end">
+                <x-button>{{ __('Commenter') }}</x-button>
+            </div>
+        </form>
     </div>
 </div>
