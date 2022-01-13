@@ -14,7 +14,8 @@ class Reference extends Model
     protected $primaryKey = "id";
     public $timestamps=false;
     protected $fillable = [
-        'description'
+        'description',
+        'url'
     ];
 
     public function opinions()
