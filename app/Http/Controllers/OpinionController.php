@@ -30,7 +30,7 @@ class OpinionController extends Controller
 
         $opinion->save();
 
-        session()->flash('message', 'Opinion successfully added');
+        session()->flash('success', 'Opinion successfully added');
 
         return redirect()->back()->withInput();
     }
@@ -39,11 +39,11 @@ class OpinionController extends Controller
     {
         $opinion = Opinion::find($id);
         if (!Auth::user()->wrote($opinion)) {
-            session()->flash('message', 'Vous ne pouvez pas suprimmer des opinions autres que les vôtres!');
+            session()->flash('error', 'Vous ne pouvez pas suprimmer des opinions autres que les vôtres!');
             return redirect()->back();
         } else {
             $opinion->delete();
-            session()->flash('message', 'Votre opinion a été suprimmée');
+            session()->flash('success', 'Votre opinion a été suprimmée');
             return redirect()->back()->withInput();
         }
     }
@@ -53,7 +53,7 @@ class OpinionController extends Controller
         $opinion = Opinion::findOrFail($opinion_id);
 
         if (Auth::user()->wrote($opinion)) {
-            session()->flash('message', 'Vous ne pouvez pas vote votre opinion !');
+            session()->flash('error', 'Vous ne pouvez pas vote votre opinion !');
             return redirect()->back()->withInput();
         }
 
@@ -63,7 +63,7 @@ class OpinionController extends Controller
             $opinion->downvote();
         }
 
-        session()->flash('message', "Vous avez voté l'opinion avec succès !");
+        session()->flash('success', "Vous avez voté l'opinion avec succès !");
         return redirect()->back()->withInput();
         
     }
@@ -89,7 +89,7 @@ class OpinionController extends Controller
             'points' => 0, 'comment' => $validated_data['comment']
         ]);
 
-        session()->flash('message', __('Vous avez commenté avec succès !'));
+        session()->flash('success', __('Vous avez commenté avec succès !'));
         return redirect()->back()->withInput();
     }
 

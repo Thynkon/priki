@@ -1,19 +1,5 @@
 <form method="post" action="{{ route('opinion.store', ['practice_id' => $practice->id]) }} ">
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    @if(session()->has('message'))
-        {{ session()->get('message') }}
-    @endif
-
-    @error('opinion') <span class="error">{{ session()->get('message') }}</span> @enderror
+    @include('flash-message')
 
     <div class="col-span-6 sm:col-span-4">
         <label class="block font-medium text-sm text-gray-700" for="practice">

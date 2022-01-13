@@ -43,10 +43,10 @@ class ReferenceController extends Controller
         $existing_reference = Reference::where('url', $validated_data['url'])->get();
 
         if ($existing_reference->isNotEmpty()) {
-            session()->flash('message', __('Il existe déjà une référence avec le même URL!'));
+            session()->flash('error', __('Il existe déjà une référence avec le même URL!'));
         } else {
             $reference = Reference::create($validated_data);
-            session()->flash('message', __('Vous avez créé une nouvelle référence avec succès !'));
+            session()->flash('success', __('Vous avez créé une nouvelle référence avec succès !'));
         }
 
         return redirect()->back()->withInput();

@@ -17,7 +17,7 @@ class PracticeController extends Controller
     public function show($id)
     {
         if (!Practice::isPublished($id)) {
-            Session::flash('message', "La practice à laquelle vous essayez d'afficher n'est pas publiée ou n'existe pas !");
+            Session::flash('error', "La practice à laquelle vous essayez d'afficher n'est pas publiée ou n'existe pas !");
             return redirect()->route('homepage');
         } else {
             $practice = Practice::with('opinions', 'user')->find($id);

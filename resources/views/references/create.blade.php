@@ -5,21 +5,7 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="flex flex-col p-10">
                         <form method="POST" action="{{ route('references.store')}}">
-                            @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            @endif
-
-                            @if(session()->has('message'))
-                                {{ session()->get('message') }}
-                            @endif
-
-                            @error('opinion') <span class="error">{{ session()->get('message') }}</span> @enderror
+                            @include('flash-message')
 
                             <div class="col-span-6 sm:col-span-4">
                                 <label class="block font-medium text-sm text-gray-700" for="practice">

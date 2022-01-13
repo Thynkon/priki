@@ -28,4 +28,17 @@ class ReferenceCreateRequest extends FormRequest
             'url' => 'required|url'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'description.min' => __('Veuiller vérifier que la taille minimum de la description est de 10 caractères!'),
+            'url.url' => __("L'URL n'est pas valide!"),
+        ];
+    }
 }
