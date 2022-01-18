@@ -19,6 +19,14 @@
                             <div class="text-gray-500 mt-4">Crée le: {{ $practice->created_at->translatedFormat('jS F Y')}}</div>
                             <div class="text-gray-500 mt-4">Mis à jour le: {{ $practice->updated_at->translatedFormat('jS F Y')}}</div>
                         </div>
+
+                        @if ($practice->canBePublished())
+                            <div class="flex flex-col items-end justify-end w-full mt-4">
+                                <a href="{{ route('practice.publish', ['id' => $practice->id]) }}" class="text-center w-28 p-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                                    {{ __('Publier') }}
+                                </a>
+                            </div>
+                        @endif
                         
                         @forelse ($practice->opinions as $opinion)
                             <x-practice-opinion :opinion="$opinion"/>

@@ -12,7 +12,7 @@ class PracticeController extends Controller
 {
     public function index()
     {
-        if (! Gate::allows('access-all-practices')) {
+        if (!Gate::allows('access-all-practices')) {
             abort(403);
         }
 
@@ -25,7 +25,7 @@ class PracticeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         // non admin users can only access published practices
         if (!Gate::allows('access-all-practices')) {
@@ -37,5 +37,21 @@ class PracticeController extends Controller
 
         $practice = Practice::with('opinions', 'user')->find($id);
         return view('practices.update')->with(['practice' => $practice]);
+    }
+
+    public function publish(int $id)
+    {
+        $practice = Practice::findOrFail($id);
+
+        $response = Gate::inspect('publish', $practice);
+
+        if ($response->allowed()) {
+            $practice->publish();
+            session()->flash('success', __('La practice a été publiée !'));
+        } else {
+            session()->flash('error', __("La practice n'a pas pu être publiée !"));
+        }
+
+        return redirect()->back();
     }
 }

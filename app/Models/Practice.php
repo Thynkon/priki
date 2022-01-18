@@ -79,4 +79,17 @@ class Practice extends Model
     {
         return $query->orderBy('domain_id');
     }
+
+    public function canBePublished()
+    {
+        return $this->publicationState->slug === 'PRO';
+    }
+
+    public function publish()
+    {
+        $publicationState = PublicationState::where('slug', '=', 'PUB')->first();
+
+        $this->publicationState()->associate($publicationState);
+        $this->save();
+    }
 }
