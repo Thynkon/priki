@@ -1,12 +1,9 @@
 <x-app-layout>
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight max-w-7xl mx-auto sm:px-6 lg:px-8">
-        {{ __('navigation-menu.homepage') }}
-    </h2>
-
     <div class="py-12">
         <div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    @include('flash-message')
                     <div class="flex flex-col md:flex-row flex-wrap p-10">
                         <div class="font-semibold text-lg mb-4">
                             {{ $practice->domain->name }}

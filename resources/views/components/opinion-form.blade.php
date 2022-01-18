@@ -1,6 +1,4 @@
 <form method="post" action="{{ route('opinion.store', ['practice_id' => $practice->id]) }} ">
-    @include('flash-message')
-
     <div class="col-span-6 sm:col-span-4">
         <label class="block font-medium text-sm text-gray-700" for="practice">
             {{ __('Opinion') }}
