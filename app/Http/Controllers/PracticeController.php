@@ -27,12 +27,15 @@ class PracticeController extends Controller
      */
     public function show($id)
     {
-        if (!Practice::isPublished($id)) {
-            Session::flash('error', "La practice à laquelle vous essayez d'afficher n'est pas publiée ou n'existe pas !");
-            return redirect()->route('homepage');
-        } else {
-            $practice = Practice::with('opinions', 'user')->find($id);
-            return view('practices.update')->with(['practice' => $practice]);
+        // non admin users can only access published practices
+        if (!Gate::allows('access-all-practices')) {
+            if (!Practice::isPublished($id)) {
+                Session::flash('error', "La practice à laquelle vous essayez d'afficher n'est pas publiée ou n'existe pas !");
+                return redirect()->route('homepage');
+            }
         }
+
+        $practice = Practice::with('opinions', 'user')->find($id);
+        return view('practices.update')->with(['practice' => $practice]);
     }
 }
