@@ -34,6 +34,7 @@ Route::resource('user', UserController::class);
 Route::post('/opinion/{practice_id}/create', [OpinionController::class, 'store'])->name('opinion.store');
 Route::get('/opinion/{id}/delete', [OpinionController::class, 'delete'])->name('opinion.delete');
 
+Route::get('/practices', [PracticeController::class, 'index'])->name('practices.index');
 Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practice.show');
 
 Route::get('/opinion/{id}/upvote', [OpinionController::class, 'upvote'])->name('opinion.upvote');

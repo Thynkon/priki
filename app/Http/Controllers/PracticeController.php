@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Domain;
 use App\Models\Practice;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 
 class PracticeController extends Controller
 {
+    public function index()
+    {
+        if (! Gate::allows('access-all-practices')) {
+            abort(403);
+        }
+
+        $domains = Domain::listOfPractices();
+        return view('practices.all')->with('domains', $domains);
+    }
     /**
      * Display the specified resource.
      *

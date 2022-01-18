@@ -49,11 +49,16 @@
                     </x-nav.dropdown>
                     <x-nav.link name="Références" route="{{ route('references.index') }}" />
 
+                    @can('access-all-practices')
+                        <x-nav.link name="Practices" route="{{ route('practices.index') }}" />
+                    @endcan
+
                     <!-- Login !-->
                     <div class="flex w-full justify-end">
                         @auth
                         <div class="flex items-center mr-4">
                             <div>{{ Auth::user()->fullname }} - {{ Auth::user()->name }}</div>
+                            <div class="ml-2 bg-green-100 p-2">{{ Auth::user()->role->name }}</div>
                         </div>
                         <form method="POST" action="{{ route('logout') }}" class="flex items-center">
                             @csrf

@@ -69,4 +69,14 @@ class Practice extends Model
     {
         return static::published()->where('id', $id)->exists();
     }
+
+    public function scopeOrderByState($query)
+    {
+        return $query->orderby('publication_state_id');
+    }
+
+    public function scopeOrderByDomain($query)
+    {
+        return $query->orderBy('domain_id');
+    }
 }

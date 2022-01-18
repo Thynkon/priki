@@ -4,9 +4,7 @@
     </h2>
 
     <div class="py-12">
-        @if(Session::has('message'))
-              <x-alert/>
-        @endif
+        @include('flash-message')
         @livewire('show-practices')
     </div>
 </x-app-layout>

@@ -106,4 +106,9 @@ class User extends Authenticatable
         // getKeyName returns the primary key field
         return $this->opinions()->where($opinion->getKeyName(), $opinion->id)->exists();
     }
+
+    public function isModerator()
+    {
+        return $this->role->slug === 'MOD';
+    }
 }
