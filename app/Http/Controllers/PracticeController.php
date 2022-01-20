@@ -47,7 +47,6 @@ class PracticeController extends Controller
     public function publish(int $id)
     {
         $practice = Practice::findOrFail($id);
-
         $response = Gate::inspect('publish', $practice);
 
         if ($response->allowed()) {

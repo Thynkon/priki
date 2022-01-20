@@ -27,4 +27,9 @@ class Reference extends Model
     {
         return $query->orderBy('description');
     }
+
+    public function scopeByUrl($query, string $url)
+    {
+        return $query->where('url', $url);
+    }
 }

@@ -67,7 +67,7 @@ class OpinionController extends Controller
             $opinion->downvote();
         }
 
-        session()->flash('success', __("Vous avez voté l'opinion avec succès !"));
+        session()->flash('success', __("Vous avez voté l'opinion !"));
         return redirect()->back()->withInput();
         
     }
@@ -93,7 +93,7 @@ class OpinionController extends Controller
             'points' => 0, 'comment' => $validated_data['comment']
         ]);
 
-        session()->flash('success', __('Vous avez commenté avec succès !'));
+        session()->flash('success', __('Vous avez commenté !'));
         return redirect()->back()->withInput();
     }
 

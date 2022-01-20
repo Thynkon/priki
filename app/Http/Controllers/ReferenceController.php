@@ -40,13 +40,13 @@ class ReferenceController extends Controller
         $validated_data = $request->validated();
         // This should the checked by creating an unique index in reference table and check if an exception was thrown.
         // But, since all students should have the same database, I am not going to add the unique index.
-        $existing_reference = Reference::where('url', $validated_data['url'])->get();
+        $existing_reference = Reference::byUrl($validated_data['url'])->get();
 
         if ($existing_reference->isNotEmpty()) {
-            session()->flash('error', __('Il existe déjà une référence avec le même URL!'));
+            session()->flash('error', __('Il existe déjà une référence avec le même URL !'));
         } else {
-            $reference = Reference::create($validated_data);
-            session()->flash('success', __('Vous avez créé une nouvelle référence avec succès !'));
+            Reference::create($validated_data);
+            session()->flash('success', __('Vous avez créé une nouvelle référence !'));
         }
 
         return redirect()->back()->withInput();
