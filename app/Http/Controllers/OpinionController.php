@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Vote;
 use App\Models\Opinion;
 use App\Models\Practice;
+use App\Models\Reference;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\OpinionCreateRequest;
 use App\Http\Requests\FeedbackCommentRequest;
@@ -23,12 +24,15 @@ class OpinionController extends Controller
 
         $user = Auth::user();
         $practice = Practice::findOrFail($practice_id);
+        $reference = Reference::findOrFail($validated_data['reference_id']);
 
         $opinion = Opinion::make(["description" => $validated_data["opinion"]]);
         $opinion->user()->associate($user);
         $opinion->practice()->associate($practice);
 
         $opinion->save();
+
+        $opinion->references()->attach($reference);
 
         session()->flash('success', __("Vous avez commenté la practice !"));
 

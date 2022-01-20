@@ -22,4 +22,9 @@ class Reference extends Model
     {
         return $this->belongsToMany(Opinion::class);
     }
+
+    public function scopeSortedByDescription($query)
+    {
+        return $query->orderBy('description');
+    }
 }

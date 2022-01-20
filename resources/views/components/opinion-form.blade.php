@@ -1,11 +1,23 @@
 <form method="post" action="{{ route('opinion.store', ['practice_id' => $practice->id]) }} ">
-    <div class="col-span-6 sm:col-span-4">
-        <label class="block font-medium text-sm text-gray-700" for="practice">
+    <div class="col-span-6 sm:col-span-4 mb-4">
+        <label class="block font-medium text-sm text-gray-700 mb-2" for="practice">
             {{ __('Opinion') }}
         </label>
         <textarea
             class="h-24 lg:h-44 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
             id="opinion" name="opinion" type="text" wire:model="opinion" required></textarea>
+    </div>
+
+    <div class="col-span-6 sm:col-span-4 mb-4">
+        <label class="block font-medium text-sm text-gray-700 mb-2" for="practice">
+            {{ __('Référence') }}
+        </label>
+
+        <select name="reference_id" class="w-full">
+            @foreach ($references as $reference)
+                <option value="{{ $reference->id }}">{{ $reference->description }}</option>
+            @endforeach
+        </select>
     </div>
 
     <input name="_token" type="hidden" value="{{ csrf_token() }}" />

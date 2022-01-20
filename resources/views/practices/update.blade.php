@@ -38,7 +38,7 @@
                         @if (Auth::user()->commentsOfPractice($practice)->count() === 0)
                             <div class="flex flex-col md:flex-row flex-wrap px-10 w-full">
                                 <div class="w-full">
-                                    <x-opinion-form :practice="$practice"/>
+                                    <x-opinion-form :practice="$practice" :references="$references"/>
                                 </div>
                             </div>
                         @endif

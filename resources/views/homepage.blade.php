@@ -1,9 +1,5 @@
 <x-app-layout>
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight max-w-7xl mx-auto sm:px-6 lg:px-8">
-        {{ __('navigation-menu.homepage') }}
-    </h2>
-
-    <div class="py-12">
+    <div class="py-4">
         @include('flash-message')
         @livewire('show-practices')
     </div>

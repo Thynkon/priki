@@ -25,6 +25,7 @@ class OpinionCreateRequest extends FormRequest
     {
         return [
             "opinion" => "required|string|max:5000",
+            "reference_id" => "required|integer",
         ];
     }
 }

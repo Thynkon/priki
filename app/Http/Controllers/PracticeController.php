@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Domain;
 use App\Models\Practice;
+use App\Models\Reference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
@@ -36,7 +37,11 @@ class PracticeController extends Controller
         }
 
         $practice = Practice::with('opinions', 'user')->find($id);
-        return view('practices.update')->with(['practice' => $practice]);
+        $references = Reference::sortedByDescription()->get();
+
+        return view('practices.update')
+            ->with('practice', $practice)
+            ->with('references', $references);
     }
 
     public function publish(int $id)
