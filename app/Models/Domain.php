@@ -24,10 +24,10 @@ class Domain extends Model
         return $this->hasMany(Practice::class);
     }
 
-    public static function listOfPractices()
+    public function scopeListOfPractices($query)
     {
-        return Domain::orderBy('slug')->with(['practices' => function ($query) {
+        return $query->orderBy('slug')->with(['practices' => function ($query) {
             $query->orderBy('publication_state_id', 'ASC');
-        }])->get();
+        }]);
     }
 }

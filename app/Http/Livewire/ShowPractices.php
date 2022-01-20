@@ -3,8 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Practice;
-use App\Models\PublicationState;
-use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -24,8 +22,8 @@ class ShowPractices extends Component
 
     public function render()
     {
-        $practices = Practice::publishedModified($this->limit);
+        $practices = Practice::published()->modifiedInLastDays($this->limit)->get();
 
-        return view('livewire.show-practices')->with(['practices' => $practices]);
+        return view('livewire.show-practices')->with('practices', $practices);
     }
 }

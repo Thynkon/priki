@@ -6,7 +6,6 @@ use App\Helpers\Vote;
 use App\Models\Reference;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Opinion extends Model
@@ -30,7 +29,7 @@ class Opinion extends Model
 
     // a feedback is an user opinion whose comment is not empty
     // a vote is an user opinion whose comment is empty and points are not zero
-     private function fb()
+    private function fb()
     {
         return $this->belongsToMany(User::class, 'user_opinion')->as('feedback')->withPivot('comment', 'points');
     }

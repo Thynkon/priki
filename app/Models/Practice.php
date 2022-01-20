@@ -33,17 +33,6 @@ class Practice extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function publishedModified(int $nbrDays)
-    {
-        $date = Carbon::now('UTC')->startOfDay();
-        $date->subDays($nbrDays);
-
-        return self::where('updated_at', '>=', $date)
-            ->whereHas('publicationState', function ($q) {
-                $q->where('slug', 'PUB');
-            })->get();
-    }
-
     public function scopeOfDomain($query, string $domain)
     {
         return $query->whereHas(
@@ -55,6 +44,14 @@ class Practice extends Model
     public function scopePublished($query)
     {
         return $this->wherePublicationState($query, 'PUB');
+    }
+
+    public function scopeModifiedInLastDays($query, int $days)
+    {
+        $date = Carbon::now('UTC')->startOfDay();
+        $date->subDays($days);
+
+        return $query->where('updated_at', '>=', $date);
     }
 
     private function wherePublicationState($query, string $state)

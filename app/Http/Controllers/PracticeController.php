@@ -5,21 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Domain;
 use App\Models\Practice;
 use App\Models\Reference;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Response;
 
 class PracticeController extends Controller
 {
     public function index()
     {
         if (!Gate::allows('access-all-practices')) {
-            abort(403);
+            abort(Response::HTTP_FORBIDDEN);
         }
 
-        $domains = Domain::listOfPractices();
+        $domains = Domain::listOfPractices()->get();
         return view('practices.all')->with('domains', $domains);
     }
+
     /**
      * Display the specified resource.
      *

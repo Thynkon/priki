@@ -13,9 +13,10 @@ class DomainController extends Controller
         $practices = Practice::published()->get();
         return view('domain.show')->with('practices', $practices);
     }
+
     public function byDomain($domain)
     {
         $practices = Practice::published()->ofDomain($domain)->get();
-        return view('domain.show')->with(['practices' => $practices]);
+        return view('domain.show')->with('practices', $practices);
     }
 }
