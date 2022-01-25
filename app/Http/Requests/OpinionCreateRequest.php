@@ -28,4 +28,16 @@ class OpinionCreateRequest extends FormRequest
             "reference_id" => "required|integer",
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'opinion.required' => __('Votre opinion ne peut pas être vide !'),
+        ];
+    }
 }
