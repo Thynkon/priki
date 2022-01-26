@@ -125,8 +125,8 @@ FLUSH PRIVILEGES;
 
 3. Generate application key and add it in `.env``
    ```sh
-   php artisan key:generate
    cp .env.example .env
+   php artisan key:generate
    ```
 
 3. Install npm dependencies
