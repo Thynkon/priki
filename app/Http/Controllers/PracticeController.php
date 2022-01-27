@@ -56,7 +56,7 @@ class PracticeController extends Controller
         if ($response->allowed()) {
             return view('practices.edit')->with('practice', $practice);
         } else {
-            abort(403);
+            abort(403, __('Vous ne pouvez pas éditer le titre de cette practice !'));
         }
     }
 
