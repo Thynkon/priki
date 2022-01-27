@@ -25,7 +25,7 @@ class UpdatePracticeRequest extends FormRequest
     {
         return [
             "title" => "required|string|min:3|max:40",
-            "reason" => "required|string|max:255",
+            "reason" => "string|nullable|max:255",
         ];
     }
 

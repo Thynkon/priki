@@ -21,7 +21,7 @@
                                 </label>
                                 <input
                                     class="h-24  border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
-                                    id="reason" name="reason" type="text" required></input>
+                                    id="reason" name="reason" type="text"></input>
                             </div>
 
                             <input name="_token" type="hidden" value="{{ csrf_token() }}" />
