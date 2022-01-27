@@ -16,7 +16,7 @@
     <div class="flex justify-between bg-gray-50 shadow p-4 my-4 rounded dropdown-button">
         <div class="flex flex-col justify-center">
             <div class="flex mb-2">
-                @if(!Auth::user()->wrote($opinion))
+                @if(Auth::check() && !Auth::user()->wrote($opinion))
                     <a href="{{ route('opinion.upvote', ['id' => $opinion->id]) }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11l7-7 7 7M5 19l7-7 7 7" />
@@ -32,7 +32,7 @@
                 <span class="pl-2">{{ $opinion->upvotes->count() }}</span>
             </div>
             <div class="flex mt-2">
-                @if(!Auth::user()->wrote($opinion))
+                @if(Auth::check() && !Auth::user()->wrote($opinion))
                     <a href="{{ route('opinion.downvote', ['id' => $opinion->id]) }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
