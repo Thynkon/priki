@@ -11,6 +11,9 @@
                         <div class="text-gray-400 text-lg mb-4">
                             Domaine - {{ $practice->domain->name }}
                         </div>
+                        <div class="text-lg mb-4">
+                            <a href="{{ route('practice.edit', ['id' => $practice->id]) }}" class="ml-4">Editer le titre</a>
+                        </div>
                         <div class="text-justify">
                             {{ $practice->description }}
                         </div>

@@ -89,4 +89,14 @@ class Practice extends Model
         $this->publicationState()->associate($publicationState);
         $this->save();
     }
+
+    public function scopeByTitle($query, string $title)
+    {
+        return $query->where('title', $title);
+    }
+
+    public function changelogs()
+    {
+        return $this->belongsToMany(User::class, 'changelogs')->as('changelogs')->withPivot('reason', 'previously', 'created_at', 'updated_at');
+    }
 }

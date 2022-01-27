@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Domain;
 use App\Models\Practice;
 use App\Models\Reference;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Response;
+use App\Http\Requests\UpdatePracticeRequest;
 
 class PracticeController extends Controller
 {
@@ -43,6 +46,40 @@ class PracticeController extends Controller
         return view('practices.update')
             ->with('practice', $practice)
             ->with('references', $references);
+    }
+
+    public function edit(int $id)
+    {
+        $practice = Practice::findOrFail($id);
+
+        return view('practices.edit')->with('practice', $practice);
+    }
+
+    public function update(UpdatePracticeRequest $request, int $id)
+    {
+        $data = $request->validated();
+        $existing_practice = Practice::byTitle($data['title'])->get();
+        $practice = Practice::findOrFail($id);
+        $old_title = "";
+
+        if ($existing_practice->isNotEmpty()) {
+            session()->flash('error', __('Il existe déjà une practice avec ce titre !'));
+            return redirect()->back()->withInput();
+        } else {
+            $old_title = $practice->title;
+            $practice->title = $data['title'];
+            $practice->save();
+            session()->flash('success', __('Le titre de la practice a été modifié !'));
+        }
+
+        $practice->changelogs()->attach(Auth::user()->id, [
+            'reason' => $data['reason'],
+            'previously' => $old_title,
+        ]);
+
+        $practice->save();
+
+        return redirect()->route('practice.update', ['id' => $id]);
     }
 
     public function publish(int $id)

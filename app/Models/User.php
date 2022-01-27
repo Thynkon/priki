@@ -111,4 +111,9 @@ class User extends Authenticatable
     {
         return $this->role->slug === 'MOD';
     }
+
+    public function changelogs()
+    {
+        return $this->belongsToMany(Practice::class, 'changelogs')->as('changelogs')->withPivot('reason', 'previously', 'created_at', 'updated_at');
+    }
 }

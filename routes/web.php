@@ -36,6 +36,8 @@ Route::get('/opinion/{id}/delete', [OpinionController::class, 'delete'])->name('
 
 Route::get('/practices', [PracticeController::class, 'index'])->name('practices.index');
 Route::get('/practice/{id}', [PracticeController::class, 'show'])->name('practice.show');
+Route::get('/practice/{id}/edit', [PracticeController::class, 'edit'])->name('practice.edit');
+Route::put('/practice/{id}', [PracticeController::class, 'update'])->name('practice.update');
 Route::get('/practice/{id}/publish', [PracticeController::class, 'publish'])->name('practice.publish');
 
 Route::get('/opinion/{id}/upvote', [OpinionController::class, 'upvote'])->name('opinion.upvote');
