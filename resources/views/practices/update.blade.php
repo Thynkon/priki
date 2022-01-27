@@ -5,17 +5,23 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     @include('flash-message')
                     <div class="flex flex-col md:flex-row flex-wrap p-10">
-                        <div class="font-semibold text-lg mb-4 mr-4">
-                            {{ $practice->title }}
-                        </div>
-                        <div class="text-gray-400 text-lg mb-4">
-                            Domaine - {{ $practice->domain->name }}
-                        </div>
-                        @if (Auth::user()->isModerator() || Auth::user()->owns($practice))
-                            <div class="text-lg mb-4">
-                                <a href="{{ route('practice.edit', ['id' => $practice->id]) }}" class="ml-4">Editer le titre</a>
+                        <div class="flex mb-4 w-full">
+                            <div class="font-semibold text-lg mb-4 mr-4">
+                                {{ $practice->title }}
                             </div>
-                        @endif
+                            <div class="text-gray-400 text-lg mb-4">
+                                Domaine - {{ $practice->domain->name }}
+                            </div>
+                            @if (Auth::user()->isModerator() || Auth::user()->owns($practice))
+                                <div class="ml-2">
+                                    <a href="{{ route('practice.edit', ['id' => $practice->id]) }}" title="{{ __('Modifier le titre') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
                         <div class="text-justify">
                             {{ $practice->description }}
                         </div>
