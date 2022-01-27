@@ -71,7 +71,7 @@ class PracticeController extends Controller
 
         // deny access if user is not mod or owner of the practice
         if (!$response->allowed()) {
-            abort(403);
+            abort(403, __('Vous ne pouvez pas éditer le titre de cette practice !'));
         }
 
         if ($existing_practice->isNotEmpty()) {
