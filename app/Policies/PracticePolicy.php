@@ -54,7 +54,9 @@ class PracticePolicy
      */
     public function update(User $user, Practice $practice)
     {
-        //
+        return $user->isModerator() || $user->owns($practice)
+            ? Response::allow()
+            : Response::deny(__('Vous ne pouvez pas modifier cette practice !'));
     }
 
     /**

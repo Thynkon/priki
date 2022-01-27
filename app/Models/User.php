@@ -116,4 +116,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Practice::class, 'changelogs')->as('changelogs')->withPivot('reason', 'previously', 'created_at', 'updated_at');
     }
+
+    public function owns(Practice $practice)
+    {
+        // getKeyName returns the primary key field
+        return $this->practices()->where($practice->getKeyName(), $practice->id)->exists();
+    }
 }

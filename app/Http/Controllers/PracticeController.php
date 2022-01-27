@@ -51,8 +51,13 @@ class PracticeController extends Controller
     public function edit(int $id)
     {
         $practice = Practice::findOrFail($id);
+        $response = Gate::inspect('update', $practice);
 
-        return view('practices.edit')->with('practice', $practice);
+        if ($response->allowed()) {
+            return view('practices.edit')->with('practice', $practice);
+        } else {
+            abort(403);
+        }
     }
 
     public function update(UpdatePracticeRequest $request, int $id)
@@ -61,6 +66,13 @@ class PracticeController extends Controller
         $existing_practice = Practice::byTitle($data['title'])->get();
         $practice = Practice::findOrFail($id);
         $old_title = "";
+
+        $response = Gate::inspect('update', $practice);
+
+        // deny access if user is not mod or owner of the practice
+        if (!$response->allowed()) {
+            abort(403);
+        }
 
         if ($existing_practice->isNotEmpty()) {
             session()->flash('error', __('Il existe déjà une practice avec ce titre !'));
