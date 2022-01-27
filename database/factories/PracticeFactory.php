@@ -19,6 +19,7 @@ class PracticeFactory extends Factory
     {
         return [
             'description' => $this->faker->realText(5000),
+            'title' => $this->faker->text(mt_rand(3, 40)),
             'domain_id' => Domain::all()->random()->id,
             'publication_state_id' => PublicationState::all()->random()->id,
             'user_id' => User::all()->random()->id,

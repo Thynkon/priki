@@ -5,8 +5,11 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     @include('flash-message')
                     <div class="flex flex-col md:flex-row flex-wrap p-10">
-                        <div class="font-semibold text-lg mb-4">
-                            {{ $practice->domain->name }}
+                        <div class="font-semibold text-lg mb-4 mr-4">
+                            {{ $practice->title }}
+                        </div>
+                        <div class="text-gray-400 text-lg mb-4">
+                            Domaine - {{ $practice->domain->name }}
                         </div>
                         <div class="text-justify">
                             {{ $practice->description }}
